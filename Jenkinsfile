@@ -3,12 +3,12 @@ pipeline {
   stages {
     stage('UnitTest') {
       steps {
-        echo "Hello, we are inside unit test, Running unit test"
+        echo "Hello, Running unit test"
       }
     }
     stage("Build") {
       steps {
-        echo "We are inside Build stage, Building core now."
+        echo "Building core now."
       }
     }
     stage("Deploy") {
