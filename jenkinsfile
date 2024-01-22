@@ -1,0 +1,20 @@
+pipeline {
+  agent any
+  stages {
+    stage('UnitTest') {
+      steps {
+        echo "Hello, We are inside unittest, Running unit test"
+      }
+    }
+    stage('Build') {
+      steps {
+        echo "We are inside build stage, building the code now."
+      }
+    }
+    stage('Deploy') {
+      step {
+        echo "We are inside deploy stage, deploying the code now."
+      }
+    }
+  }
+}
