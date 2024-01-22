@@ -22,9 +22,12 @@ pipeline {
         '''
       }
     }
-    stage("Deploy") {
+    stage("Deploy Maven App") {
       steps {
         echo "We are deploying the app."
+        sh '''
+        bash docker-container-create.sh
+        '''
       }
     }
   }
