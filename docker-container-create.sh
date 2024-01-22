@@ -1,5 +1,7 @@
-echo "Removing previously build container"
-docker container rm -f java-tomcat-sample-container || true
+echo "Stopping previously built container"
+docker container stop java-tomcat-sample-container
+echo "Removing previously built container"
+docker container rm java-tomcat-sample-container || true
 echo "Pulling image from harbor registry!!"
 docker image pull harbor.registry.local/java-tomcat-sample/1-21-maven-app:$BUILD_NUMBER
 echo "Running container for image:"
