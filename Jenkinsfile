@@ -1,9 +1,15 @@
 pipeline {
   agent any
   stages {
-    stage('UnitTest') {
+    stage('BuildApplication') {
       steps {
-        echo "Hello, Running unit test"
+        sh 'mvn -f pom.xml clean package'
+      }
+      post {
+        success {
+            echo "We are archiving the artifact"
+            archiveArtifacts artifacts: '**/*.war', followSymlinks: false
+        }
       }
     }
     stage("Build") {
