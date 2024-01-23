@@ -1,12 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('Prepare Workspace') {
-      steps {
-        // Clean up the workspace before starting the build
-        deleteDir()
-      }
-    }
     stage('BuildApplication') {
       steps {
         sh 'mvn -f pom.xml clean package'
