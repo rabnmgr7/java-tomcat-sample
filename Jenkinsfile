@@ -14,7 +14,7 @@ pipeline {
     }
     stage("CreateTomcatImage") {
       steps {
-        copyArtifacts filter: '**/*.war', fingerprintArtifacts: true, projectName: BuildApplication, selector: lastSuccessful()
+        copyArtifacts filter: '**/*.war', fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: lastSuccessful()
         sh '''
         bash docker-image-build.sh
         '''
