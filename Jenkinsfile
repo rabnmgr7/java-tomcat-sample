@@ -17,16 +17,13 @@ pipeline {
         copyArtifacts filter: '**/*.war', fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: lastSuccessful()
         sh '''
         bash docker-image-build.sh
-        original_pwd=$(pwd -P)
-        echo "$original_pwd"
         '''
       }
     }
     stage("Deploy Maven App") {
       steps {
-        echo "We are deploying the app."
         sh '''
-        bash docker-container-create.sh
+        echo "We are deploying the app."
         '''
       }
     }
