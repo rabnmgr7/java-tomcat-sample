@@ -14,13 +14,15 @@ pipeline {
     }
     stage("CreateTomcatImage") {
       steps {
-        def buildNumber = env.BUILD_NUMBER
-        def projectName = env.JOB_NAME
-        def artifactName = "java-tomcat-maven-example.war"
-        copyArtifacts filter: '**/*.war', fingerprintArtifacts: true, projectName: projectName, selector: specific(buildNumber)
-        sh '''
-        bash docker-image-build.sh
-        '''
+        script {
+          def buildNumber = env.BUILD_NUMBER
+          def projectName = env.JOB_NAME
+          def artifactName = "java-tomcat-maven-example.war"
+          copyArtifacts filter: '**/*.war', fingerprintArtifacts: true, projectName: projectName, selector: specific(buildNumber)
+          sh '''
+          bash docker-image-build.sh
+          '''
+        }
       }
     }
     stage("Deploy Maven App") {
