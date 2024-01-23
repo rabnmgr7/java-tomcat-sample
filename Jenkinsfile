@@ -4,11 +4,11 @@ pipeline {
     stage('BuildApplication') {
       steps {
         sh 'mvn -f pom.xml clean package'
-        post {
-          success {
+      }
+      post {
+        success {
             echo "We are archiving the artifact"
             archiveArtifacts artifacts: '**/*.war', followSymlinks: false
-          }
         }
       }
     }
