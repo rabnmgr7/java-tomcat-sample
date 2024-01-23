@@ -29,6 +29,7 @@ pipeline {
       steps {
         sh '''
         echo "We are deploying the app."
+        bash docker-container-create.sh
         '''
       }
     }
