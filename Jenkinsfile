@@ -14,7 +14,10 @@ pipeline {
     }
     stage("CreateTomcatImage") {
       steps {
-        copyArtifacts filter: '**/*.war', fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: lastSuccessful()
+        def buildNumber = env.BUILD_NUMBER
+        def projectName = env.JOB_NAME
+        def artifactName = "java-tomcat-maven-example.war"
+        copyArtifacts filter: '**/*.war', fingerprintArtifacts: true, projectName: projectName, selector: specific(buildNumber)
         sh '''
         bash docker-image-build.sh
         '''
