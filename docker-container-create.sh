@@ -1,5 +1,5 @@
 echo "Stopping previously built container"
-docker container stop java-tomcat-sample-container
+docker container stop java-tomcat-sample-container || true
 echo "Removing previously built container"
 docker container rm java-tomcat-sample-container || true
 echo "Pulling image from harbor registry!!"
