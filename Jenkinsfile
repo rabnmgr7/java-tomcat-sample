@@ -35,6 +35,9 @@ pipeline {
     }
     stage("Deploy in Stagging Instance") {
       steps {
+        timeout(time:5, unit:'MINUTES'){
+          input message: 'Approve the stagging deployment'
+        }
         sh '''
         echo "We are deploying the app in stagging env."
         cp ./docker-container-create.sh ./docker-stagging-container-create.sh
