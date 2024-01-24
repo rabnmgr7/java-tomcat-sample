@@ -25,11 +25,22 @@ pipeline {
         }
       }
     }
-    stage("Deploy Maven App") {
+    stage("Deploy in QA Instance") {
       steps {
         sh '''
         echo "We are deploying the app."
         bash docker-container-create.sh
+        '''
+      }
+    }
+    stage("Deploy in Stagging Instance") {
+      steps {
+        sh '''
+        echo "We are deploying the app in stagging env.
+        cp ./docker-container-create.sh ./docker-stagging-container-create.sh
+        sed -i 's/java-tomcat-sample-container/java-tomcat-stagging-container/g' docker-stagging-container-create.sh
+        sed -i 's/8083/8084/g' docker-stagging-container-create.sh
+        bash docker-stagging-container-create.sh
         '''
       }
     }
