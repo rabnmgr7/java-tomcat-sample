@@ -27,6 +27,9 @@ pipeline {
     }
     stage("Deploy in QA Instance") {
       steps {
+        timeout(time:1 unit: 'MINUTES') {
+          input message: 'Approve QA Instance'
+        }
         sh '''
         echo "We are deploying the app."
         bash docker-container-create.sh
@@ -35,7 +38,7 @@ pipeline {
     }
     stage("Deploy in Stagging Instance") {
       steps {
-        timeout(time:5, unit:'MINUTES'){
+        timeout(time:5, unit:'MINUTES') {
           input message: 'Approve the stagging deployment'
         }
         sh '''
