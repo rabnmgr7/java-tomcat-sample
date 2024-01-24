@@ -27,7 +27,7 @@ pipeline {
     }
     stage("Deploy in QA Instance") {
       steps {
-        timeout(time:1 unit: 'MINUTES') {
+        timeout(time:1, unit: 'MINUTES') {
           input message: 'Approve QA Instance'
         }
         sh '''
