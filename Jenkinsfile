@@ -1,5 +1,7 @@
 pipeline {
-  agent any
+  agent {
+    label 'built-in-node'
+  }
   stages {
     stage('BuildApplication') {
       steps {
@@ -13,6 +15,9 @@ pipeline {
       }
     }
     stage("CreateTomcatImage") {
+      agent {
+        label 'ubuntu-slave-worker1'
+      }
       steps {
         script {
           def buildNumber = env.BUILD_NUMBER
@@ -26,6 +31,9 @@ pipeline {
       }
     }
     stage("Deploy in QA Instance") {
+      agent {
+        label 'ubuntu-slave-worker1'
+      }
       steps {
         timeout(time:1, unit: 'MINUTES') {
           input message: 'Approve QA Instance'
@@ -37,6 +45,9 @@ pipeline {
       }
     }
     stage("Deploy in Stagging Instance") {
+      agent {
+        label 'ubuntu-slave-worker1'
+      }
       steps {
         timeout(time:5, unit:'MINUTES') {
           input message: 'Approve the stagging deployment'
